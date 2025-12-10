@@ -25,7 +25,7 @@ export type Trace = {
   initial: Log | null,
   entries: Log[],
   status: numbers.U32,
-  implementaton: string,
+  implementation: string,
 }
 
 // TODO [ToDr] introduce union codec
@@ -100,6 +100,6 @@ export const TraceCodec = codec.object<Trace>({
   entries: codec.sequenceVarLen(LogCodec),
   // 0 - panic, 1 - halt
   status: codec.varU32,
-  implementaton: codec.string,
+  implementation: codec.string,
 });
 // export type Trace = codecPkg.DescribedBy<typeof Trace>;
