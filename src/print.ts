@@ -1,7 +1,7 @@
-import {Log, Trace} from "./types";
+import {Log, MemoryDataKind, Trace} from "./types.js";
 
 export function printTrace(trace: Trace) {
-  console.info(`Implementation: ${trace.implementaton}`);
+  console.info(`Implementation: ${trace.implementation}`);
   console.info(`Format: ${trace.format}`);
   console.info(`Codehash: ${trace.codehash}`);
   console.info(`Final status: ${trace.status === 0 ? 'PANIC' : 'HALT'}`);
@@ -19,7 +19,7 @@ function logToString(log: Log | null) {
 
   const memory = () => {
     return log.memory.map(x => {
-      const chunk = x.data.type === 'length' ? `len: ${x.data.value}` : x.data.value.toString();
+      const chunk = x.data.kind === MemoryDataKind.Length ? `len: ${x.data.value}` : x.data.value.toString();
       return `${x.access === 0 ? 'R' : 'W'} @ ${x.address.toString(16)} -> ${chunk}`;
     }).join(', ');
   };

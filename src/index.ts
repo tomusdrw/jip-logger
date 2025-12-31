@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import {codec} from '@typeberry/lib';
+import {Decoder} from '@typeberry/lib/codec';
 import minimist from 'minimist';
 import { TraceCodec } from './types.js';
 import {printTrace} from './print.js';
@@ -14,7 +14,7 @@ if (args._.length === 0) {
 for (const file of args._) {
   console.log(`Reading ${file}`);
   const f = readFileSync(file);
-  const trace = codec.Decoder.decodeObject(TraceCodec, f);
+  const trace = Decoder.decodeObject(TraceCodec, f);
   printTrace(trace);
 }
 
